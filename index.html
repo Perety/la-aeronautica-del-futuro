@@ -16,20 +16,13 @@
     .hero {
       position: relative;
       height: 90vh;
+      background: linear-gradient(135deg, #00111a, #002b40);
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: white;
       overflow: hidden;
-    }
-
-    .hero-background {
-      position: absolute;
-      inset: 0;
-      background: url('f350c5449e9870adfca4446b3760da46.gif') center/cover no-repeat;
-      filter: blur(6px) brightness(0.5);
-      z-index: 0;
     }
 
     .hero-content {
@@ -196,7 +189,6 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-background"></div>
     <div class="hero-content">
       <h1>𝑨𝒗𝒊𝒂𝒄𝒊𝒐́𝒏 𝑴𝒊𝒍𝒊𝒕𝒂𝒓 𝒅𝒆 𝑺𝒆𝒙𝒕𝒂 𝑮𝒆𝒏𝒆𝒓𝒂𝒄𝒊𝒐́𝒏</h1>
       <p>Descubre la nueva era del combate aéreo: plataformas inteligentes, invisibles y conectadas globalmente.</p>
@@ -210,11 +202,85 @@
     <hr>
 
     <div class="gallery">
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/NGAD_concept_render.jpg">
+        <div class="card-text">
+          <h4>NGAD (EE.UU.)</h4>
+          <p>El futuro caza estadounidense que reemplazará al F-22, combinando inteligencia artificial y diseño modular.</p>
+          <div class="extra-info">Incorpora enjambres de drones, sensores distribuidos y capacidad de combate autónomo.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
 
-      <!-- Aquí se mantienen las 8 tarjetas -->
-      <!-- NGAD, Tempest, FCAS, KF-21, FX, AMCA, Su-75, TF-X -->
-      <!-- Puedes copiar el bloque completo de tarjetas del código anterior -->
-      
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Tempest_Concept_-_Farnborough_2018.jpg">
+        <div class="card-text">
+          <h4>Tempest (Reino Unido)</h4>
+          <p>Desarrollado por el Reino Unido, Italia y Japón, busca dominar la aviación europea del futuro.</p>
+          <div class="extra-info">Prevé operación en red con drones, IA integrada y sistemas de energía avanzada.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/FCAS_Concept_2021.jpg">
+        <div class="card-text">
+          <h4>FCAS (Francia/Alemania/España)</h4>
+          <p>El Sistema Aéreo de Combate del Futuro europeo, un ecosistema de cazas y drones interconectados.</p>
+          <div class="extra-info">Destaca por su arquitectura en nube y capacidades de guerra electrónica avanzada.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/KF-21_Boramae_first_flight_2022.jpg">
+        <div class="card-text">
+          <h4>KF-21 Boramae (Corea del Sur)</h4>
+          <p>Un caza de 4.5ª generación con ambiciones de evolucionar a 6ª mediante IA y sensores distribuidos.</p>
+          <div class="extra-info">Podría integrarse con sistemas autónomos y capacidades de sigilo extremo.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Japanese_FX_concept.jpg">
+        <div class="card-text">
+          <h4>FX (Japón)</h4>
+          <p>Futuro caza japonés desarrollado junto a Reino Unido y Mitsubishi, sucesor del F-2.</p>
+          <div class="extra-info">Equipado con sensores 360º, IA táctica y diseño furtivo evolucionado del F-22/F-35.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/HAL_AMCA_Render.jpg">
+        <div class="card-text">
+          <h4>AMCA (India)</h4>
+          <p>El primer caza furtivo indio, destinado a competir en la categoría de 5ª y 6ª generación.</p>
+          <div class="extra-info">Integrará motores hipersónicos y arquitectura abierta para evolución tecnológica.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sukhoi_Su-75_Checkmate.jpg">
+        <div class="card-text">
+          <h4>Su-75 Checkmate (Rusia)</h4>
+          <p>El nuevo proyecto de caza ruso de bajo coste y alta maniobrabilidad, derivado del Su-57.</p>
+          <div class="extra-info">Prevé versiones no tripuladas y actualizaciones IA para misiones autónomas.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
+
+      <div class="card" onclick="toggleExpand(this)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/TAI_TF-X_Kaan_render.jpg">
+        <div class="card-text">
+          <h4>TF-X Kaan (Turquía)</h4>
+          <p>Desarrollo turco con ambición de independencia tecnológica y compatibilidad OTAN.</p>
+          <div class="extra-info">Usará radar AESA, IA de combate y sistemas de control de vuelo avanzados.</div>
+          <button class="expand-btn">Ver más</button>
+        </div>
+      </div>
     </div>
   </section>
 
