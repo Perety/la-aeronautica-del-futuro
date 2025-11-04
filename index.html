@@ -2,371 +2,269 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>Aviación Militar — 6ª Generación (Completa)</title>
+  <title>Aviación Militar — 6ª Generación</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <!-- External libs (CDN) -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
   <style>
+    /* ---------- Variables de color y reset básico ---------- */
     :root{
-      --bg: #0a0a0a;
-      --panel: #111;
-      --muted: #bfcfe0;
+      --bg: #050608;
+      --panel: #0f1720;
+      --card: #121417;
       --accent: #00bfff;
-      --card: #1a1a1a;
-      --glass: rgba(255,255,255,0.03);
-      --radius: 14px;
-      --transition: 0.28s;
+      --muted: #cdd7e0;
+      --muted-2: #98a6b3;
+      --glass: rgba(255,255,255,0.02);
+      --radius: 12px;
+      --trans: 280ms;
+      font-size: 16px;
     }
-    [data-theme="light"]{
-      --bg: #f6f8fa;
-      --panel: #ffffff;
-      --muted: #475569;
-      --accent: #0077b6;
-      --card: #fff;
-      --glass: rgba(0,0,0,0.03);
-    }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#00111a,#002b40);
-      background-color:var(--bg);
-      color:var(--muted);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      transition: background var(--transition), color var(--transition);
-    }
+    html,body{height:100%; margin:0; font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    body{ background: linear-gradient(180deg,#021016 0%, #001923 100%); color:var(--muted); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 
-    /* Top header / small bar with search + actions */
-    .topbar{
-      position:sticky; top:0; z-index:1200;
+    /* ---------- Top navbar ---------- */
+    .navbar{
+      position: sticky; top:0; z-index:1000;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 18px; gap:12px;
       backdrop-filter: blur(6px);
-      background: linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));
-      border-bottom:1px solid rgba(255,255,255,0.03);
-      padding:10px 18px;
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
     }
-    .brand{
-      display:flex; gap:12px; align-items:center;
+    .brand { display:flex; align-items:center; gap:12px; }
+    .logo {
+      width:48px; height:48px; border-radius:10px;
+      background: linear-gradient(135deg,var(--accent), #004e66);
+      display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff;
+      box-shadow: 0 6px 18px rgba(0,191,255,0.07);
     }
-    .brand .logo{
-      width:44px;height:44px;border-radius:10px;
-      background:linear-gradient(135deg,var(--accent),#004e66);
-      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;
-      box-shadow:0 6px 18px rgba(0,191,255,0.08);
-    }
-    .brand h1{ font-size:16px; margin:0; color:var(--accent); letter-spacing:0.6px;}
-    .actions{ display:flex; gap:8px; align-items:center; }
+    .brand h1 { margin:0; font-size:16px; color:var(--accent); letter-spacing:0.6px; }
+    .brand p { margin:0; font-size:12px; color:var(--muted-2); }
 
-    /* Search */
-    .search{
-      display:flex; gap:10px; align-items:center;
-      background:var(--glass); padding:8px; border-radius:999px;
-      border:1px solid rgba(255,255,255,0.03);
+    /* ---------- Search ---------- */
+    .search {
+      display:flex; align-items:center; gap:8px;
+      background:var(--glass); padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,0.03);
     }
     .search input{
-      background:transparent;border:0;outline:none;color:var(--muted);
-      padding:6px 8px; min-width:220px;
+      background:transparent; border:0; outline:none; color:var(--muted); font-size:14px; width:240px;
     }
+    .search button{ background:transparent; border:0; color:var(--muted-2); cursor:pointer; }
 
-    /* Layout */
-    .container{ max-width:1200px; margin:24px auto; padding:0 18px; }
+    /* ---------- Container ---------- */
+    .container{ max-width:1100px; margin:22px auto; padding:0 18px; }
 
-    /* Hero */
+    /* ---------- Hero ---------- */
     .hero{
-      border-radius:16px; padding:48px; position:relative; overflow:hidden;
-      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.05));
-      box-shadow: 0 10px 40px rgba(0,0,0,0.45);
-      display:flex; gap:24px; align-items:center; justify-content:space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+      padding:36px; border-radius:14px; display:flex; gap:18px; align-items:center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      overflow:hidden;
     }
-    .hero-left{ max-width:640px; }
-    .hero h2{ color:var(--accent); margin:0 0 12px 0; font-size:34px; }
-    .hero p{ color:var(--muted); margin:0 0 18px 0; line-height:1.5 }
-    .hero .cta{ display:inline-block; background:var(--accent); color:#fff; padding:12px 22px; border-radius:10px; text-decoration:none; font-weight:600; box-shadow:0 8px 28px rgba(0,191,255,0.12); }
+    .hero-left{ flex:1; min-width:220px; }
+    .hero h2{ margin:0 0 8px 0; color:var(--accent); font-size:28px; }
+    .hero p{ margin:0; color:var(--muted-2); line-height:1.4; }
 
-    /* Swiper hero images on right */
-    .hero-right{ width:46%; max-width:520px; }
-    .swiper{ border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.45); }
+    /* CTA */
+    .cta{ display:inline-block; margin-top:12px; background:var(--accent); color:#001521; padding:10px 18px; border-radius:10px; text-decoration:none; font-weight:700; box-shadow:0 8px 28px rgba(0,191,255,0.08); }
 
-    /* Sections */
-    section{ margin-top:36px; }
+    /* ---------- Gallery / cards ---------- */
+    .section-title{ margin:28px 0 6px 0; color:var(--accent); font-size:20px; text-align:center; }
+    .gallery{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:18px; margin-top:14px; }
 
-    h3.section-title{ color:var(--accent); margin:0 0 8px 0; font-size:22px; }
-    .muted{ color:var(--muted); font-size:15px }
-
-    /* Side fixed menu */
-    .side-menu{
-      position:fixed; left:14px; top:50%; transform:translateY(-50%);
-      display:flex; flex-direction:column; gap:8px; z-index:1200;
-    }
-    .side-menu button{
-      width:48px;height:48px;border-radius:12px;border:0;background:var(--card); color:#fff;
-      box-shadow:0 8px 20px rgba(0,0,0,0.3); cursor:pointer;
-      display:flex;align-items:center;justify-content:center;
-    }
-
-    /* Gallery / cards */
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap:20px;
-      margin-top:18px;
-    }
     .card{
       background:var(--card); border-radius:var(--radius); overflow:hidden;
-      box-shadow:0 6px 22px rgba(0,0,0,0.35); transition:transform var(--transition), box-shadow var(--transition);
-      display:flex; flex-direction:column;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+      transition: transform var(--trans), box-shadow var(--trans);
+      cursor:pointer; display:flex; flex-direction:column;
     }
-    .card:hover{ transform:translateY(-8px); box-shadow:0 18px 50px rgba(0,0,0,0.45); }
-    .card img{ width:100%; height:180px; object-fit:cover; display:block; }
-    .card-body{ padding:14px; flex:1; display:flex; flex-direction:column; gap:8px; }
-    .card-body h4{ margin:0; color:var(--accent); font-size:18px; }
-    .card-body p{ margin:0; color:var(--muted); font-size:14px; flex:1; }
-    .card-footer{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px 14px; border-top:1px solid rgba(255,255,255,0.02); background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
-    .badge{ font-size:12px; color: #fff; background: rgba(0,0,0,0.25); padding:6px 10px; border-radius:10px; }
+    .card:hover{ transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+    .card img{ width:100%; height:160px; object-fit:cover; display:block; }
+    .card .body{ padding:12px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
+    .card h4{ margin:0; color:var(--accent); font-size:16px; }
+    .card p{ margin:0; color:var(--muted-2); font-size:13px; flex:1; }
+    .card .extra{ display:none; color:#cfeeff; font-size:13px; margin-top:8px; line-height:1.4; }
+    .card.expanded .extra{ display:block; }
 
-    .expand-btn{ background:transparent;border:1px solid rgba(255,255,255,0.06); color:var(--accent); padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
-    .expand-btn:hover{ background:rgba(0,191,255,0.06) }
+    .card .footer{ display:flex; justify-content:space-between; align-items:center; gap:8px; padding-top:10px; margin-top:8px; border-top:1px solid rgba(255,255,255,0.02); }
+    .btn-small{ background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--accent); padding:8px 10px; border-radius:8px; font-weight:700; cursor:pointer; }
+    .chip { padding:6px 10px; background: rgba(255,255,255,0.02); border-radius:999px; font-size:12px; color:var(--muted-2); }
 
-    .extra{ display:none; color:#cfeeff; font-size:13px; margin-top:8px; line-height:1.4 }
+    /* ---------- News ---------- */
+    .news-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin-top:10px; }
+    .news-card{ background:var(--card); padding:12px; border-radius:10px; color:var(--muted-2); }
 
-    .card.expanded .extra{ display:block }
-
-    /* News grid */
-    .news-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:16px; margin-top:12px; }
-    .news{ background:var(--card); padding:12px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.28); }
-    .news h5{ margin:0 0 6px 0; color:var(--accent); }
-    .news p{ margin:0; color:var(--muted); font-size:13px; }
-
-    /* Back to top */
+    /* ---------- Back to top ---------- */
     .top-btn{
-      position:fixed; right:18px; bottom:22px; z-index:1200;
-      width:52px;height:52px;border-radius:12px;background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; box-shadow:0 14px 40px rgba(0,0,0,0.45); cursor:pointer; border:0;
-      transform:translateY(0); transition:transform .2s, opacity .2s;
-      opacity:0; pointer-events:none;
+      position:fixed; right:18px; bottom:18px; z-index:999; background:var(--accent); color:#001521;
+      border:0; padding:12px 14px; border-radius:10px; font-weight:700; display:flex; align-items:center; justify-content:center; cursor:pointer;
+      box-shadow: 0 12px 36px rgba(0,191,255,0.12); opacity:0; transform:translateY(12px); transition:opacity 200ms, transform 200ms;
     }
-    .top-btn.show{ opacity:1; pointer-events:auto; transform:translateY(-6px); }
+    .top-btn.show{ opacity:1; transform:translateY(0); }
 
-    /* small util */
-    .row{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
-    .chip{ padding:8px 12px; background:var(--glass); border-radius:999px; color:var(--muted); font-weight:600; }
-
-    @media (max-width:980px){
-      .hero{ flex-direction:column; gap:18px }
-      .hero-right{ width:100% }
-      .side-menu{ display:none }
+    /* ---------- Small screens ---------- */
+    @media (max-width:900px){
+      .hero{ flex-direction:column; align-items:flex-start; }
+      .search input{ width:140px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- SIDE MENU -->
-  <div class="side-menu" aria-hidden="false">
-    <button title="Inicio" onclick="scrollToSection('top')"><i class="fa-solid fa-house"></i></button>
-    <button title="Proyectos" onclick="scrollToSection('proyectos')"><i class="fa-solid fa-plane"></i></button>
-    <button title="Noticias" onclick="scrollToSection('noticias')"><i class="fa-solid fa-newspaper"></i></button>
-    <button title="Contacto" onclick="scrollToSection('footer')"><i class="fa-solid fa-address-book"></i></button>
-    <button id="themeToggle" title="Cambiar tema"><i class="fa-solid fa-moon"></i></button>
-  </div>
-
-  <!-- TOPBAR -->
-  <div class="topbar container" id="top">
-    <div class="brand">
+  <!-- NAVBAR / TOPBAR -->
+  <header class="navbar" role="banner">
+    <div class="brand" aria-hidden="false">
       <div class="logo">6G</div>
       <div>
-        <h1>Aviación 6ª Generación</h1>
-        <div style="font-size:12px;color:var(--muted)">Catálogo y novedades — aviones y prototipos</div>
+        <h1>𝘼𝙫𝙞𝙖𝙘𝙞𝙤́𝙣 𝙈𝙞𝙡𝙞𝙩𝙖𝙧</h1>
+        <p>6ª Generación — Proyectos y noticias</p>
       </div>
     </div>
 
-    <div style="display:flex;align-items:center; gap:12px;">
+    <div style="display:flex;align-items:center;gap:12px">
       <div class="search" role="search" aria-label="Buscar modelos">
-        <i class="fa-solid fa-search" style="color:var(--muted)"></i>
-        <input id="searchInput" placeholder="Buscar por nombre o país..." aria-label="Buscar modelos">
-        <button id="clearSearch" title="Limpiar" style="background:transparent;border:0;color:var(--muted);cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-
-      <div class="actions">
-        <button id="soundToggle" title="Sonido" style="background:var(--glass);border:0;padding:8px 10px;border-radius:10px;color:var(--muted);cursor:pointer"><i class="fa-solid fa-bell"></i></button>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:0.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input id="search" placeholder="Buscar por nombre o país..." aria-label="Buscar modelos">
+        <button id="clear" title="Limpiar búsqueda" aria-label="Limpiar">✕</button>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- CONTAINER -->
-  <main class="container">
+  <!-- MAIN CONTAINER -->
+  <main class="container" id="top">
 
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-left">
         <h2 id="hero-title">Aviación Militar de Sexta Generación</h2>
-        <p class="muted">Explora los proyectos, tecnologías y noticias que están definiendo la próxima generación de cazas: plataformas conectadas, IA, enjambres y más.</p>
-        <div class="row" style="margin-top:18px">
-          <a class="cta" href="#proyectos">Explorar modelos</a>
-          <div class="chip">Última actualización: 2025</div>
-        </div>
+        <p>Explora los principales proyectos, tecnologías y noticias que están moldeando el futuro del combate aéreo.</p>
+        <a class="cta" href="#proyectos">Ver proyectos</a>
       </div>
-
-      <div class="hero-right">
-        <!-- Swiper carousel with featured renders -->
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3323?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7de7a72d6f2a4b9a1d9d7a1b9f1b8c78" alt="Concept 1" style="width:100%;height:320px;object-fit:cover"></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1541534401786-2f5c6f9b3c15?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5bb9e3f3d9f8a1c2e6f4b7e8a8a1c9e0" alt="Concept 2" style="width:100%;height:320px;object-fit:cover"></div>
-            <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6f3e6b3b4d3f7d9f1a0e8b2a9c3e6f44" alt="Concept 3" style="width:100%;height:320px;object-fit:cover"></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
+      <div class="hero-right" style="min-width:260px;max-width:360px">
+        <!-- Simple featured image -->
+        <img src="https://images.unsplash.com/photo-1545987797-2fb3a96f6d8b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5b6c52c3e6f87f7b0c7a4d47e7b9b6a1"
+             alt="Render avión futurista" style="width:100%; height:200px; object-fit:cover; border-radius:10px; display:block; box-shadow: 0 10px 30px rgba(0,0,0,0.5)">
       </div>
     </section>
 
-    <!-- PROYECTOS -->
-    <section id="proyectos" aria-labelledby="projects-title">
-      <h3 class="section-title" id="projects-title">Proyectos Principales</h3>
-      <p class="muted" style="text-align:center;max-width:900px;margin:10px auto 0">Los programas más destacados que están marcando el rumbo de la aviación futura.</p>
+    <!-- PROJECTS -->
+    <section id="proyectos">
+      <h3 class="section-title">Proyectos Principales</h3>
+      <p style="text-align:center;color:var(--muted-2);margin-top:6px">Haz clic en una tarjeta para ver más detalles.</p>
 
-      <!-- search results count -->
-      <div style="display:flex;justify-content:center;margin-top:10px"><span id="resultsCount" class="muted"></span></div>
+      <div id="results" style="text-align:center;color:var(--muted-2);margin-top:10px"></div>
 
-      <div class="gallery" id="cardsGrid">
-        <!-- Cards (images are new/realistic concept images from Unsplash/Wiki public) -->
-        <!-- Card 1 NGAD -->
-        <article class="card" data-name="ngad" data-country="EE.UU." data-aos="fade-up">
+      <div class="gallery" id="grid">
+        <!-- Card 1: NGAD -->
+        <article class="card" data-name="NGAD" data-country="EE. UU.">
           <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/NGAD_concept_render.jpg" alt="NGAD render">
-          <div class="card-body">
+          <div class="body">
             <h4>NGAD — EE. UU.</h4>
-            <p>Next Generation Air Dominance: arquitectura modular, interoperabilidad y sensores distribuidos.</p>
-            <div class="extra">Diseñado para integración en redes de combate y trabajo conjunto con plataformas no tripuladas.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: NGAD</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha NGAD (pendiente)')">Ficha</a>
+            <p>Proyecto Next Generation Air Dominance para sustituir a los actuales cazas con arquitectura modular y sensores en red.</p>
+            <div class="extra">Apunta a operaciones cooperativas con drones, sensores distribuidos y alta conectividad de datos en tiempo real.</div>
+            <div class="footer">
+              <div class="chip">EE. UU.</div>
+              <div>
+                <button class="btn-small" onclick="toggleCard(this)">Abrir</button>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- Card 2 Tempest -->
-        <article class="card" data-name="tempest" data-country="Reino Unido" data-aos="fade-up" data-aos-delay="50">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Tempest_Concept_-_Farnborough_2018.jpg" alt="Tempest">
-          <div class="card-body">
+        <!-- Card 2: Tempest -->
+        <article class="card" data-name="Tempest" data-country="Reino Unido">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Tempest_Concept_-_Farnborough_2018.jpg" alt="Tempest render">
+          <div class="body">
             <h4>Tempest — Reino Unido</h4>
-            <p>IA integrada, control de drones y capacidades avanzadas de guerra electrónica.</p>
-            <div class="extra">Parte del programa GCAP con socios europeos y asiáticos para una familia de sistemas aéreo.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: Tempest</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha Tempest (pendiente)')">Ficha</a>
-              </div>
+            <p>Plataforma con IA, integración de drones y capacidades de guerra electrónica avanzada dentro del programa GCAP.</p>
+            <div class="extra">Diseñado para operar en red con Remote Carriers y control avanzado de sistemas autónomos.</div>
+            <div class="footer">
+              <div class="chip">Reino Unido</div>
+              <div><button class="btn-small" onclick="toggleCard(this)">Abrir</button></div>
             </div>
           </div>
         </article>
 
-        <!-- Card 3 FCAS -->
-        <article class="card" data-name="fcas" data-country="Europa" data-aos="fade-up" data-aos-delay="100">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/FCAS_Concept_2021.jpg" alt="FCAS">
-          <div class="card-body">
+        <!-- Card 3: FCAS -->
+        <article class="card" data-name="FCAS" data-country="Francia Alemania España">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/FCAS_Concept_2021.jpg" alt="FCAS render">
+          <div class="body">
             <h4>FCAS — Francia/Alemania/España</h4>
-            <p>Sistema aéreo de combate en red: cazas, Remote Carriers y nube de combate digital.</p>
-            <div class="extra">Énfasis en interoperabilidad, guerra electrónica y evolución modular de sensores.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: FCAS</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha FCAS (pendiente)')">Ficha</a>
-              </div>
+            <p>Sistema aéreo de combate del futuro: cazas tripulados y no tripulados integrados en una nube de combate.</p>
+            <div class="extra">Enfoque en interoperabilidad, guerra electrónica y una arquitectura basada en servicios compartidos.</div>
+            <div class="footer">
+              <div class="chip">Europa</div>
+              <div><button class="btn-small" onclick="toggleCard(this)">Abrir</button></div>
             </div>
           </div>
         </article>
 
-        <!-- Card 4 KF-21 -->
-        <article class="card" data-name="kf-21 boramae" data-country="Corea del Sur" data-aos="fade-up" data-aos-delay="150">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/KF-21_Boramae_first_flight_2022.jpg" alt="KF-21">
-          <div class="card-body">
+        <!-- Card 4: KF-21 -->
+        <article class="card" data-name="KF-21" data-country="Corea del Sur">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/KF-21_Boramae_first_flight_2022.jpg" alt="KF-21 Boramae">
+          <div class="body">
             <h4>KF-21 Boramae — Corea del Sur</h4>
-            <p>Caza 4.5ª con ambiciones evolutivas hacia capacidades de próxima generación.</p>
-            <div class="extra">Radar AESA, aviónica moderna y capacidad de integración con sistemas no tripulados.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: KF-21</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha KF-21 (pendiente)')">Ficha</a>
-              </div>
+            <p>Caza de 4.5ª generación con ambición de evolución hacia capacidades de próxima generación mediante IA y aviónica avanzada.</p>
+            <div class="extra">Incluye radar AESA, aviónica moderna y posibilidad de operar con drones acompañantes.</div>
+            <div class="footer">
+              <div class="chip">Corea del Sur</div>
+              <div><button class="btn-small" onclick="toggleCard(this)">Abrir</button></div>
             </div>
           </div>
         </article>
 
-        <!-- Card 5 FX (Japón) -->
-        <article class="card" data-name="fx" data-country="Japón" data-aos="fade-up" data-aos-delay="200">
+        <!-- Card 5: FX (Japón) -->
+        <article class="card" data-name="FX" data-country="Japón">
           <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Japanese_FX_concept.jpg" alt="FX Japón">
-          <div class="card-body">
+          <div class="body">
             <h4>FX — Japón</h4>
-            <p>Programa sucesor del F-2 con fuerte colaboración internacional y enfoque en IA.</p>
-            <div class="extra">Diseño furtivo avanzado, sensores 360º y alta interoperabilidad con aliados.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: FX</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha FX (pendiente)')">Ficha</a>
-              </div>
+            <p>Programa sucesor del F-2, con colaboración internacional y fuerte enfoque en sensores y sigilo.</p>
+            <div class="extra">Prevé sensores 360º, IA táctica y altos niveles de interoperabilidad con aliados.</div>
+            <div class="footer">
+              <div class="chip">Japón</div>
+              <div><button class="btn-small" onclick="toggleCard(this)">Abrir</button></div>
             </div>
           </div>
         </article>
 
-        <!-- Card 6 AMCA (India) -->
-        <article class="card" data-name="amca" data-country="India" data-aos="fade-up" data-aos-delay="250">
+        <!-- Card 6: AMCA (India) -->
+        <article class="card" data-name="AMCA" data-country="India">
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/HAL_AMCA_Render.jpg" alt="AMCA India">
-          <div class="card-body">
+          <div class="body">
             <h4>AMCA — India</h4>
-            <p>Advanced Medium Combat Aircraft: primer caza furtivo indio con arquitectura abierta.</p>
-            <div class="extra">Busca independencia tecnológica con aviónica y motores domésticos en evolución.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: AMCA</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha AMCA (pendiente)')">Ficha</a>
-              </div>
+            <p>Advanced Medium Combat Aircraft: primer caza furtivo indio con arquitectura abierta para evolución.</p>
+            <div class="extra">Buscará independencia tecnológica con aviónica y motores locales en fases posteriores.</div>
+            <div class="footer">
+              <div class="chip">India</div>
+              <div><button class="btn-small" onclick="toggleCard(this)">Abrir</button></div>
             </div>
           </div>
         </article>
 
-        <!-- Card 7 Su-75 Checkmate -->
-        <article class="card" data-name="su-75 checkmate" data-country="Rusia" data-aos="fade-up" data-aos-delay="300">
+        <!-- Card 7: Su-75 Checkmate -->
+        <article class="card" data-name="Su-75" data-country="Rusia">
           <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Sukhoi_Su-75_Checkmate.jpg" alt="Su-75">
-          <div class="card-body">
+          <div class="body">
             <h4>Su-75 Checkmate — Rusia</h4>
-            <p>Caza ligero/medio enfocado al mercado exportador con diseño furtivo y costes reducidos.</p>
-            <div class="extra">Diseño modular con versiones tripuladas y no tripuladas previstas.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: Su-75</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha Su-75 (pendiente)')">Ficha</a>
-              </div>
+            <p>Diseñado para el mercado exportador: caza de bajo coste con firma reducida y alta maniobrabilidad.</p>
+            <div class="extra">Se plantea en versiones tripuladas y no tripuladas con actualización modular.</div>
+            <div class="footer">
+              <div class="chip">Rusia</div>
+              <div><button class="btn-small" onclick="toggleCard(this)">Abrir</button></div>
             </div>
           </div>
         </article>
 
-        <!-- Card 8 TF-X Kaan -->
-        <article class="card" data-name="tf-x kaan" data-country="Turquía" data-aos="fade-up" data-aos-delay="350">
+        <!-- Card 8: TF-X Kaan -->
+        <article class="card" data-name="TF-X" data-country="Turquía">
           <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/TAI_TF-X_Kaan_render.jpg" alt="TF-X Kaan">
-          <div class="card-body">
+          <div class="body">
             <h4>TF-X Kaan — Turquía</h4>
-            <p>Proyecto turco de gran envergadura para lograr una industria de defensa más independiente.</p>
-            <div class="extra">Radar AESA, aviónica local y compatibilidad con estándares aliados.</div>
-            <div class="card-footer">
-              <span class="badge">Proyecto: TF-X</span>
-              <div style="display:flex; gap:8px;">
-                <button class="expand-btn" onclick="toggleExpandCard(event, this)">Abrir</button>
-                <a class="chip" href="#" onclick="event.preventDefault(); alert('Ir a ficha TF-X (pendiente)')">Ficha</a>
-              </div>
+            <p>Proyecto turco para una industria de defensa más independiente, con aviónica y radar AESA locales.</p>
+            <div class="extra">Orientado a compatibilidad OTAN y producción nacional avanzada.</div>
+            <div class="footer">
+              <div class="chip">Turquía</div>
+              <div><button class="btn-small" onclick="toggleCard(this)">Abrir</button></div>
             </div>
           </div>
         </article>
@@ -374,169 +272,99 @@
       </div>
     </section>
 
-    <!-- Noticias -->
-    <section id="noticias" aria-labelledby="news-title">
-      <h3 class="section-title" id="news-title">Noticias y Avances</h3>
-      <p class="muted" style="text-align:center;max-width:900px;margin:10px auto 0">Últimas novedades tecnológicas y anuncios relevantes.</p>
+    <!-- NEWS -->
+    <section id="noticias">
+      <h3 class="section-title">Noticias y Avances</h3>
+      <p style="text-align:center;color:var(--muted-2);margin-top:6px">Titulares recientes sobre pruebas, inversiones y actualizaciones.</p>
 
-      <div class="news-grid" style="margin-top:14px">
-        <article class="news" data-aos="fade-up">
-          <h5>Pruebas de vuelo NGAD</h5>
-          <p>Se han realizado pruebas iniciales con prototipos de sensores compartidos en red.</p>
-        </article>
-        <article class="news" data-aos="fade-up" data-aos-delay="60">
-          <h5>EU acelera FCAS</h5>
-          <p>Europa anuncia nueva inversión para acelerar integración con drones remotos.</p>
-        </article>
-        <article class="news" data-aos="fade-up" data-aos-delay="120">
-          <h5>KF-21: actualización Block 2</h5>
-          <p>Corea confirma mejoras en aviónica y capacidades furtivas para la siguiente versión.</p>
-        </article>
+      <div class="news-grid" aria-live="polite">
+        <article class="news-card"><strong>Pruebas NGAD:</strong> Prototipos realizan ensayos integrando sensores en red.</article>
+        <article class="news-card"><strong>FCAS acelera:</strong> Nuevos fondos para desarrollo de Remote Carriers.</article>
+        <article class="news-card"><strong>KF-21 Block 2:</strong> Corea anuncia mejoras de aviónica y sigilo.</article>
       </div>
     </section>
 
   </main>
 
   <!-- FOOTER -->
-  <footer id="footer" style="padding:28px 0;margin-top:36px">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+  <footer style="text-align:center;padding:26px 18px;color:var(--muted-2)">
+    <div style="max-width:1100px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
       <div style="display:flex;gap:12px;align-items:center">
-        <div style="width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#004e66);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">6G</div>
+        <div style="width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#004e66);display:flex;align-items:center;justify-content:center;color:#001521;font-weight:700">6G</div>
         <div>
           <div style="color:var(--accent);font-weight:700">Aviación Militar — 6ª Generación</div>
-          <div class="muted" style="font-size:13px">© 2025 — Contenido informativo</div>
+          <div style="font-size:13px;color:var(--muted-2)">© 2025 — Contenido informativo</div>
         </div>
       </div>
-
-      <div style="display:flex;gap:8px;align-items:center">
-        <a href="#" style="color:var(--muted)"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#" style="color:var(--muted)"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" style="color:var(--muted)"><i class="fa-brands fa-twitter"></i></a>
-        <a href="#" style="color:var(--muted)"><i class="fa-brands fa-linkedin"></i></a>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a href="#" style="color:var(--muted-2);text-decoration:none">Facebook</a>
+        <a href="#" style="color:var(--muted-2);text-decoration:none">Instagram</a>
+        <a href="#" style="color:var(--muted-2);text-decoration:none">Twitter</a>
       </div>
     </div>
   </footer>
 
-  <!-- Back to top -->
-  <button id="topBtn" class="top-btn" title="Volver arriba" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
+  <!-- Back to top button -->
+  <button id="topBtn" class="top-btn" aria-label="Volver arriba">↑</button>
 
-  <!-- Audio ping (radar) -->
-  <audio id="pingSound" src="https://freesound.org/data/previews/341/341695_6260416-lq.mp3" preload="auto"></audio>
-
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+  <!-- ---------- JavaScript sencillo (buscador, expandir, volver arriba) ---------- -->
   <script>
-    // Init AOS
-    AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
-
-    // Init Swiper
-    const swiper = new Swiper('.mySwiper', {
-      loop: true,
-      autoplay: { delay: 2600, disableOnInteraction: false },
-      pagination: { el: '.swiper-pagination', clickable: true },
-      slidesPerView: 1,
-    });
-
-    // Toggle expand card (button) - keeps event control
-    function toggleExpandCard(e, btn){
-      e.stopPropagation();
-      const card = btn.closest('.card');
-      if(!card) return;
-      card.classList.toggle('expanded');
-      playPing();
-      // smooth scroll card into view on mobile
-      if(window.innerWidth < 700) card.scrollIntoView({behavior:'smooth', block:'center'});
-    }
-
-    // Toggle on clicking whole card
-    document.querySelectorAll('.card').forEach(c=>{
-      c.addEventListener('click', ()=> {
-        c.classList.toggle('expanded');
-        playPing();
-      });
-    });
-
-    // Play ping if enabled
-    const ping = document.getElementById('pingSound');
-    let soundEnabled = true;
-    document.getElementById('soundToggle').addEventListener('click', ()=>{
-      soundEnabled = !soundEnabled;
-      document.getElementById('soundToggle').style.opacity = soundEnabled ? 1 : 0.45;
-    });
-    function playPing(){ if(!soundEnabled) return; ping.currentTime = 0; ping.play().catch(()=>{}); }
-
-    // Theme toggle / remember preference
-    const themeBtn = document.getElementById('themeToggle');
-    const root = document.documentElement;
-    function applyTheme(theme){
-      if(theme === 'light'){ root.setAttribute('data-theme','light'); themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>'; }
-      else { root.removeAttribute('data-theme'); themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>'; }
-      localStorage.setItem('siteTheme', theme);
-    }
-    themeBtn.addEventListener('click', ()=>{
-      const current = localStorage.getItem('siteTheme') === 'light' ? 'light' : 'dark';
-      applyTheme(current === 'light' ? 'dark' : 'light');
-    });
-    (function(){ const saved = localStorage.getItem('siteTheme'); if(saved) applyTheme(saved); else {
-      // set auto by prefers-color-scheme
-      const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-      applyTheme(prefers ? 'light' : 'dark');
-    }})();
-
-    // Back to top button show/hide
+    // Elements
+    const grid = document.getElementById('grid');
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    const search = document.getElementById('search');
+    const clear = document.getElementById('clear');
+    const results = document.getElementById('results');
     const topBtn = document.getElementById('topBtn');
-    window.addEventListener('scroll', ()=>{
-      if(window.scrollY > 420) topBtn.classList.add('show'); else topBtn.classList.remove('show');
-    });
-    topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
-    function scrollToSection(id){ document.getElementById(id) ? document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}) : window.scrollTo({top:0,behavior:'smooth'}) }
 
-    // Search/filter
-    const searchInput = document.getElementById('searchInput');
-    const clearSearch = document.getElementById('clearSearch');
-    const cards = Array.from(document.querySelectorAll('.gallery .card'));
-    const resultsCount = document.getElementById('resultsCount');
-
-    function updateResultsCount(n){
-      resultsCount.textContent = n === 0 ? 'No se han encontrado modelos.' : `${n} modelo${n>1?'s':''} mostrado${n>1?'s':''}.`;
+    // Toggle card expanded (button or click)
+    function toggleCard(btn){
+      // btn may be the button element inside a card - find its article
+      const card = btn.closest('.card') || btn;
+      card.classList.toggle('expanded');
+      // if expanded, scroll into view (nice on mobile)
+      if(card.classList.contains('expanded')) card.scrollIntoView({behavior:'smooth', block:'center'});
     }
 
-    function filterCards(){
-      const q = searchInput.value.trim().toLowerCase();
+    // Make whole card clickable (toggle)
+    cards.forEach(c=>{
+      c.addEventListener('click', (e)=>{
+        // avoid clicking the button twice
+        if(e.target.tagName.toLowerCase() === 'button' || e.target.tagName.toLowerCase() === 'a') return;
+        toggleCard(c);
+      });
+      // allow keyboard toggling
+      c.setAttribute('tabindex','0');
+      c.addEventListener('keydown', (ev)=>{ if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggleCard(c); } });
+    });
+
+    // Search / filter
+    function updateResults(n){
+      results.textContent = n === 0 ? 'No se han encontrado modelos.' : `${n} modelo${n>1?'s':''} mostrado${n>1?'s':''}.`;
+    }
+    function doFilter(){
+      const q = (search.value || '').trim().toLowerCase();
       let visible = 0;
       cards.forEach(c=>{
-        const name = c.getAttribute('data-name') || '';
-        const country = c.getAttribute('data-country') || '';
-        if(!q || name.includes(q) || country.toLowerCase().includes(q)){
-          c.style.display = ''; visible++;
-        } else {
-          c.style.display = 'none';
-        }
+        const name = (c.dataset.name || '').toLowerCase();
+        const country = (c.dataset.country || '').toLowerCase();
+        const match = !q || name.includes(q) || country.includes(q);
+        c.style.display = match ? '' : 'none';
+        if(match) visible++;
       });
-      updateResultsCount(visible);
+      updateResults(visible);
     }
-    searchInput.addEventListener('input', ()=> { filterCards(); });
-    clearSearch.addEventListener('click', ()=> { searchInput.value=''; filterCards(); searchInput.focus(); });
+    search.addEventListener('input', doFilter);
+    clear.addEventListener('click', ()=>{ search.value=''; search.focus(); doFilter(); });
 
-    // Initialize results count on load
-    filterCards();
+    // Init results
+    doFilter();
 
-    // Accessibility: keyboard toggle expand with Enter on focused card
-    cards.forEach(c=>{
-      c.setAttribute('tabindex','0');
-      c.addEventListener('keydown', (ev)=>{
-        if(ev.key === 'Enter' || ev.key === ' '){
-          ev.preventDefault();
-          c.classList.toggle('expanded');
-          playPing();
-        }
-      });
+    // Back to top show/hide
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 300) topBtn.classList.add('show'); else topBtn.classList.remove('show');
     });
-
-    // Prevent autoplay audio blocking: ensure user interacts before enabling sound
-    window.addEventListener('click', ()=>{ soundEnabled = true; document.getElementById('soundToggle').style.opacity = 1; }, { once:true });
-
+    topBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
   </script>
 </body>
 </html>
